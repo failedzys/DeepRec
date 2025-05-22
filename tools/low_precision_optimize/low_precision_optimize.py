@@ -352,7 +352,7 @@ def dense_opt(session, graph_def, opt_config, data_type, calib_file):
 
 def update_embedding_vars(session):
     update_dict = dict()
-    node_dic = {nd.name: nd for nd in session.graph_def.node}
+    node_dic = {nd.name: nd for nd in session.graph.as_graph_def().node}
     for op in session.graph.get_operations():
         if op.type == 'KvResourceImportV2':
             var = get_variable_by_name(op.inputs[1].name)
